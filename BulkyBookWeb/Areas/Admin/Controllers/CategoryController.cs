@@ -5,8 +5,9 @@ using BulkyBook.Models;
 //using BulkyBookWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BulkyBookWeb.Controllers
+namespace BulkyBookWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         //private readonly ApplicationDbContext _db;
@@ -64,7 +65,7 @@ namespace BulkyBookWeb.Controllers
                 return NotFound();
             }
            /* var CategoryFromDb = _db.Categories.Find(id)*/;
-            var categoryFromDbFirst= _unitOfWork.Category.GetFirstOrDefault(u=>u.Id == id);
+            var categoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
             //var categoryFromDbSingle = _db.Categories.SingleOrDefault(u => u.Id == id);
             if (categoryFromDbFirst == null)
             {
@@ -107,8 +108,8 @@ namespace BulkyBookWeb.Controllers
             {
                 return NotFound();
             }
-           // var CategoryFromDb = _db.Categories.Find(id);
-            var CategoryFromDbFirst= _unitOfWork.Category.GetFirstOrDefault(u=>u.Id == id);
+            // var CategoryFromDb = _db.Categories.Find(id);
+            var CategoryFromDbFirst = _unitOfWork.Category.GetFirstOrDefault(u => u.Id == id);
             //var ategoryFromDbSingle = _db.Categories.SingleOrDefault(u => u.Id == id);
             if (CategoryFromDbFirst == null)
             {
