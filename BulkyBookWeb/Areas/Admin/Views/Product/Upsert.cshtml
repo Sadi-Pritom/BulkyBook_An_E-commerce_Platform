@@ -1,5 +1,4 @@
-﻿
-@model Product
+﻿@model BulkyBook.Models.ViewModels.ProductVM
 <form method="post" asp-action="Upsert">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
@@ -10,50 +9,72 @@
         @*<div asp-validation-summary="All"></div>*@
         <div class="mb-3">
             <level>Title</level>
-            <input asp-for="Title" class="form-control" />
-            <span asp-validation-for="Title" class="text-danger"></span>
+            <input asp-for="Product.Title" class="form-control" />
+            <span asp-validation-for="Product.Title" class="text-danger"></span>
 
         </div>
         <div class="mb-3">
             <level>Description</level>
-            <textarea asp-for="Description" rows="3" class="form-control" ></textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
+            <textarea asp-for="Product.Description" rows="3" class="form-control"></textarea>
+            <span asp-validation-for="Product.Description" class="text-danger"></span>
 
         </div>
         <div class="mb-3">
             <level>ISBN</level>
-            <input asp-for="ISBN" class="form-control" />
-            <span asp-validation-for="ISBN" class="text-danger"></span>
+            <input asp-for="Product.ISBN" class="form-control" />
+            <span asp-validation-for="Product.ISBN" class="text-danger"></span>
 
         </div>
         <div class="mb-3">
             <level>Author</level>
-            <input asp-for="Author" class="form-control" />
-            <span asp-validation-for="Author" class="text-danger"></span>
+            <input asp-for="Product.Author" class="form-control" />
+            <span asp-validation-for="Product.Author" class="text-danger"></span>
 
         </div>
         <div class="mb-3">
             <level>ListPrice</level>
-            <input asp-for="ListPrice" class="form-control" />
-            <span asp-validation-for="ListPrice" class="text-danger"></span>
+            <input asp-for="Product.ListPrice" class="form-control" />
+            <span asp-validation-for="Product.ListPrice" class="text-danger"></span>
 
         </div>
         <div class="mb-3">
             <level>Price</level>
-            <input asp-for="Price" class="form-control" />
-            <span asp-validation-for="Price" class="text-danger"></span>
+            <input asp-for="Product.Price" class="form-control" />
+            <span asp-validation-for="Product.Price" class="text-danger"></span>
 
         </div>
         <div class="mb-3">
             <level>Price50</level>
-            <input asp-for="Price50" class="form-control" />
-            <span asp-validation-for="Price50" class="text-danger"></span>
+            <input asp-for="Product.Price50" class="form-control" />
+            <span asp-validation-for="Product.Price50" class="text-danger"></span>
 
         </div>
         <div class="mb-3">
             <level>Price100</level>
-            <input asp-for="Price100" class="form-control" />
-            <span asp-validation-for="Price100" class="text-danger"></span>
+            <input asp-for="Product.Price100" class="form-control" />
+            <span asp-validation-for="Product.Price100" class="text-danger"></span>
+
+        </div>
+        <div class="mb-3">
+            <level>CategoryId</level>
+            
+@*            <select asp-validation-for="CategoryId" asp-items="ViewBag.CategoryList" class="form-select">
+*@                <select asp-validation-for="CategoryId" asp-items="Model.CategoryList" class="form-select">
+
+                <option disabled-selected>--Select Category--</option>
+            </select>
+            <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+
+        </div>
+        <div class="mb-3">
+            <level>CoverTypeId</level>
+
+@*            <select asp-validation-for="CoverTypeId" asp-items="@(ViewData["CoverTypeList"] as IEnumerable<SelectListItem>)" class="form-select">
+*@                <select asp-validation-for="CoverTypeId" asp-items="@Model.CoverTypeList" class="form-select">
+
+                <option disabled-selected>--Select CoverType--</option>
+            </select>
+            <span asp-validation-for="Product.CoverTypeId" class="text-danger"></span>
 
         </div>
 
