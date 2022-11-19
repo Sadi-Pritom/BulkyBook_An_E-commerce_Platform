@@ -15,9 +15,11 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         //private readonly ApplicationDbContext _db;
         //private readonly ICategoryRepository _db;
         private readonly IUnitOfWork _unitOfWork;
-        public ProductController(IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _hostEnvironment;
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _hostEnvironment = hostEnvironment;
         }
 
         public IActionResult Index()
@@ -88,7 +90,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         //Post
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(ProductVM obj,IFormFile file)
+        public IActionResult Upsert(ProductVM obj,IFormFile? file)
         {
             //if (obj.Name == obj.DisplayOrder.ToString())
             //{
@@ -101,9 +103,24 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
+
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                if(file!=null)
+                {
+                 string fileName=Guid.NewGuid().ToString();
+                    var uploads=Path.Combine(wwwRootPath, @"images\products");
+                    var extension=Path.GetExtension(file.FileName);
+
+                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                    {
+                        file.CopyTo(fileStreams);
+                    }
+                    obj.Product.ImageUrl = @"\images\products\" + fileName + extension;
+                }
                 //_unitOfWork.CoverType.Update(obj);
+                _unitOfWork.Prdouct.Add(obj.Product);
                 _unitOfWork.Save();
-                TempData["success"] = "CoverType updated successfully";
+                TempData["success"] = "Product created successfully";
                 return RedirectToAction("Index");
 
             }
@@ -163,7 +180,7 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             }
             _unitOfWork.CoverType.Remove(obj);
             _unitOfWork.Save();
-            TempData["success"] = "CoverType deleted successfully";
+            TempData["success"] = "Product deleted successfully";
             return RedirectToAction("Index");
         }
 

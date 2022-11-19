@@ -4,8 +4,8 @@
         <div class="row pb-2">
             <h2 class="text-primary">@(Model.Product.Id!=0?"Update":"Create") Product</h2>
             <hr />
-
         </div>
+    
         @*<div asp-validation-summary="All"></div>*@
         <div class="mb-3">
             <level>Title</level>
@@ -14,7 +14,7 @@
 
         </div>
         <div class="mb-3 ">
-            <level>Description</level>
+            <level > Description</level>
             <textarea asp-for="Product.Description" rows="3" class="form-control"></textarea>
             <span asp-validation-for="Product.Description" class="text-danger"></span>
 
@@ -58,16 +58,16 @@
         <div class="mb-3">
             
             <label asp-for="Product.ImageUrl"  />
-            <input type="file" id="uploadBox" class="form-contrl"/>
+            <input type="file" id="uploadBox" name="file" class="form-contrl"/>
 
          
 
         </div>
         <div class="mb-3 col-6">
-            <level>CategoryId</level>
+            <level >CategoryId</level>
             
 @*            <select asp-validation-for="CategoryId" asp-items="ViewBag.CategoryList" class="form-select">
-*@                <select asp-validation-for="CategoryId" asp-items="Model.CategoryList" class="form-select">
+*@                <select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" class="form-select">
 
                 <option disabled-selected>--Select Category--</option>
             </select>
@@ -78,7 +78,7 @@
             <level>CoverTypeId</level>
 
 @*            <select asp-validation-for="CoverTypeId" asp-items="@(ViewData["CoverTypeList"] as IEnumerable<SelectListItem>)" class="form-select">
-*@                <select asp-validation-for="CoverTypeId" asp-items="@Model.CoverTypeList" class="form-select">
+*@                <select asp-for="Product.CoverTypeId" asp-items="@Model.CoverTypeList" class="form-select">
 
                 <option disabled-selected>--Select CoverType--</option>
             </select>
@@ -94,7 +94,7 @@
                 <button type="submit" onclick="return ValidateInput()"    class="btn btn-primary" style="width:150px">Create</button>
             }
 
-        <a asp-controller="CoverType" asp-action="index" class="btn btn-secondary" style="width:150px">Back to list</a>
+        <a asp-controller="Product" asp-action="index" class="btn btn-secondary" style="width:150px">Back to list</a>
         </div>
     </div>
 
