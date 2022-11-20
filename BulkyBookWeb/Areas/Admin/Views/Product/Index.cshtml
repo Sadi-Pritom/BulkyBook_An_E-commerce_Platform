@@ -24,7 +24,7 @@
     </div>
 
 
-<table class="table table-bodered table-striped" style="width:100%">
+<table id="tblData" class="table table-bodered table-striped" style="width:100%">
     <thead>
         <tr>
             <th>
@@ -43,10 +43,14 @@
                     Category
                 </th>
            
-            <th></th>
+           @* <th></th>*@
         </tr>
     </thead>
    
 </table>
 
 </div>
+
+@section Scripts{
+    <script src="~/js/product.js"></script>
+}
